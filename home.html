@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <title>JustStreamIt</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script src="script.js"></script>
+
+</head>
+<body>
+
+
+        <header>
+            <div class="logo">
+                <img src="JSI_Logo.png">
+            </div>
+           <nav class="menu">
+                <ul>
+                    <li><a href=""> Accueil </a></li>
+                    <li><select name="categories" id="category-select"
+                                onchange="window.location=('home.html#' + this.options[this.selectedIndex].value)">
+                            <option value="">--Please choose a category--</option>
+                            <option
+                                    value="allMoviesSection">All
+                                movies</option>
+                            <option value="zombieMoviesSection">Zombie
+                                movies</option>
+                            <option value="romanceMoviesSection">Romance
+                                movies</option>
+                            <option value="actionMoviesSection">Action
+                                movies</option>
+                        </select>
+                    </li>
+                </ul>
+           </nav>
+        </header>
+        <div class="content">
+            <section class="best_film" id="bestMovie">
+
+            </section>
+
+            <section class="carousel" id="allMoviesSection">
+                <a> Best movies all genres combined </a>
+                <! Best note for any movie type>
+                <ul id="allMovies" class="carousel"></ul>
+            </section>
+
+            <section class="carousel" id="zombieMoviesSection">
+                <a> Best zombie movies </a>
+                <! meilleures notes pour tous les films de zombie>
+                <ul class="carousel" id="zombieMovies">
+
+                </ul>
+            </section>
+
+            <section class="carousel"  id="romanceMoviesSection">
+                <a > Best romance movies </a>
+                <! meilleures notes pour tous les films romances>
+                <ul class="carousel" id="romanceMovies">
+
+                </ul>
+            </section>
+
+            <section class="carousel" id="actionMoviesSection" >
+            <a> Best action movies </a>
+            <! meilleures notes pour tous les films d'action>
+            <ul class="carousel" id="actionMovies">
+
+            </ul>
+        </section>
+        </div>
+<script src="script.js"></script>
+</body>
+</html>
