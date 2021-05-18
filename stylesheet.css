@@ -3,37 +3,56 @@
 font-family: 'Lobster', cursive;
 font-family: 'Poppins', sans-serif; */
 
+
+
 body {
     background-color: #eeeeee;
+    margin-top: 150px;
+    width: 1900px;
+}
+
+body.movie {
+    overflow-y: hidden;
 
 }
 
 
 header{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: flex-end;
+    margin: 125px;
     margin-top:0;
     border-bottom: 3px solid #d65a31;
-    overflow: hidden;
     position: fixed; /* Set the navbar to fixed position */
-    width : 100% ;
+    width : 1600px;
     padding-right: 50px;
     padding-left: 0px;
     top: 0; /* Position the navbar at the top of the page */
     background-color : #eeeeee;
 }
 
+header.movieDetailsHeader {
+    position: absolute; /* Set the navbar to fixed position */
 
+}
+
+.content{
+    margin : 150px;
+    }
 
 .logo img
 {
     height: 120px;
     width: auto;
     margin-left:0;
-    margin-right: 700px;
+
 }
 
+div.logo {
+    display: block;
+
+}
 
 nav ul
 {
@@ -63,8 +82,21 @@ nav a:hover, select:hover
     color: #d65a31;
     border-bottom: 3px solid #d65a31;
 }
-.content{
-    margin : 150px;}
+
+
+
+div#movieDetailsHeader {
+    display: flex;
+    justify-content: flex-end;
+    color: #393e46;
+    font-family: 'Lobster', cursive;
+    font-size:60px;
+    margin : auto;
+    margin-right : 0;
+
+
+
+}
 
 section.best_film{
     width: auto;
@@ -72,9 +104,36 @@ section.best_film{
     display: flex;
     justify-content: space-around;
 
+}
+.movieDetailsContent{
+    display : flex;
+    flex-direction: column;
+}
 
+#movieDetailsDescription{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 
 }
+
+div.movieDetailsImage{
+    margin: auto;
+    padding-top : 40px;
+    padding-bottom: 40px;
+    align-item : center;
+    justify-content: center;
+
+}
+
+p.movieDetailsDescription{
+    width: 25em;
+    margin: auto;
+    align-item: center;
+
+}
+
 
 
 
@@ -98,7 +157,7 @@ section.best_film p {
 }
 
 
-button.btn
+.btn
 {
     background-color: #d65a31;
     border-radius: 50px;
@@ -137,7 +196,7 @@ section {
 }
 
 
-section li:hover{
+li.carousel-item:hover{
     border: 3px solid #d65a31;
     border-radius : 5px;
 
@@ -174,7 +233,40 @@ section.carousel a {
 
 }
 
+img.movieImageDetails {
+    height: 50px;
+    width: auto;
 
+}
+
+ul#movieDetailsGeneralInfo{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+ul#movieDetailsOtherInfo{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+ul#movieDetailsActors {
+    list-style-type: none;
+    display: grid;
+    grid-template-rows: repeat(3, 20px);
+    grid-gap: 10px;
+    grid-auto-flow: column;
+
+
+}
+div.goBackBtn{
+    display: flex;
+    justify-content: center;
+
+}
 
 ::-webkit-scrollbar-track {
     background-color: #393e46;

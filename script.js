@@ -1,11 +1,11 @@
 $(document).ready(function(){
     console.log('Ready')
-    getAllContent();
+    getAllContentHomePage();
 
 });
 
-// Collect all movies
-function getAllContent(){
+// Collect all movies for home page
+function getAllContentHomePage(){
     getBestMovie();
     getAllMovies();
     getZombieMovies();
@@ -23,9 +23,9 @@ function getBestMovie () {
             let output = `
                <div class="best_film" >
                     <a> The best of the best </a>
-                    <h1 > "${resp.title}" </h1>
+                    <h1 > "${resp.title}"</h1>
                     <p > "${resp.long_description}"</p>
-                    <button class="btn" >More info</button>
+                    <button id="bestMovie" class="btn" onclick="movieSelected('${resp.url}')">More info</button>
                </div>
                <div class="best_film_image">
                     <img src="${resp.image_url}">
@@ -55,7 +55,7 @@ function getAllMovies (){
              $.each(allMovies, (index, movie) => {
                 output += `
 
-                        <li class="carousel-item" >
+                        <li class="carousel-item" onclick="movieSelected('${movie.url}')" >
                             <h2 >"${movie.title}" </h2>
                             <img src="${movie.image_url}">
                         </li>
@@ -85,7 +85,7 @@ function getZombieMovies (){
              $.each(allMovies, (index, movie) => {
                 output += `
 
-                        <li class="carousel-item" >
+                        <li class="carousel-item" onclick="movieSelected('${movie.url}')">
                             <h2 >"${movie.title}" </h2>
                             <img src="${movie.image_url}">
                         </li>
@@ -115,7 +115,7 @@ function getActionMovies (){
              $.each(allMovies, (index, movie) => {
                 output += `
 
-                        <li class="carousel-item" >
+                        <li class="carousel-item" onclick="movieSelected('${movie.url}')">
                             <h2 >"${movie.title}" </h2>
                             <img src="${movie.image_url}">
                         </li>
@@ -145,7 +145,7 @@ function getRomanceMovies (){
              $.each(allMovies, (index, movie) => {
                 output += `
 
-                        <li class="carousel-item" >
+                        <li class="carousel-item" onclick="movieSelected('${movie.url}')">
                             <h2 >"${movie.title}" </h2>
                             <img src="${movie.image_url}">
                         </li>
@@ -157,3 +157,84 @@ function getRomanceMovies (){
    })}
 })}
 
+function movieSelected (url) {
+    sessionStorage.setItem('movieUrl', url);
+    window.location = 'movie.html';
+    return false;
+
+}
+
+function getMovieDetails (){
+    let movieUrl = sessionStorage.getItem('movieUrl');
+    movieDetailsHeader(movieUrl);
+    movieDetailsGeneralInfo(movieUrl);
+    movieDetailsDescription(movieUrl);
+    getActors(movieUrl);
+    movieDetailsOtherInfo(movieUrl);
+}
+
+
+function movieDetailsHeader (movieUrl) {
+    fetch(movieUrl).then(async(responseData) => {
+        const response = await responseData.json();
+        let output = `
+            "${response.title}"  `;
+            $("#movieDetailsHeader").html(output);})
+
+}
+
+function movieDetailsGeneralInfo(movieUrl){
+    fetch(movieUrl).then(async(responseData) => {
+        const response = await responseData.json();
+        let output = `
+            <li class="movieDetailsGenre"> Genres : "${response.genres}"</li>
+            <li class="movieDetailsDate"> Released : "${response.date_published}"</li>
+            <li class="movieDetailsDuration"> Duration : "${response.duration}" min</li>
+            <li class="movieDetailsImdb_score"> imdb Score : "${response.imdb_score}"</li>
+            <li class="movieDetailsRated"> Rating : "${response.rated}"</li>
+             `;
+            $("#movieDetailsGeneralInfo").html(output);})
+
+}
+
+function movieDetailsDescription(movieUrl){
+    fetch(movieUrl).then(async(responseData) => {
+        const response = await responseData.json();
+        let output = `
+            <p class="movieDetailsDescription">"${response.long_description}"</p>
+            <div class="movieDetailsImage">
+             <img class="movieDetailsImage" src="${response.image_url}">
+             </div>
+             `;
+            $("#movieDetailsDescription").html(output);})
+}
+
+
+
+
+function getActors (movieUrl) {
+    fetch(movieUrl).then(async(responseData) => {
+        const response = await responseData.json();
+        let listOfActors = response.actors
+        let output = "";
+        $.each(listOfActors, (index, actor) => {
+            output += ` <li> "${actor}" </li> `;
+        });
+        console.log(output)
+        $('#movieDetailsActors').html(output);})
+}
+
+function movieDetailsOtherInfo (movieUrl) {
+    fetch(movieUrl).then(async(responseData) => {
+        const response = await responseData.json();
+        let listOfGenres = response.genres
+        let output = `
+        <li> Directors : "${response.directors}" </li>
+        <li> Countries : "${response.countries}" </li>
+        <li> Box Office : "${response.worldwide_gross_income}" </li>
+
+        `;
+
+        console.log(output)
+        $('#movieDetailsOtherInfo').html(output);})
+}
